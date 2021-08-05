@@ -30,6 +30,6 @@ export class UsersController{
 
     @Delete('/:id')
     deleteUser(@Param('id') id:number){
-        return 'user has been removed'
+        return users.splice(id,1)
     }
 }
