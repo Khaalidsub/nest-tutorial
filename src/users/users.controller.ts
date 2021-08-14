@@ -1,35 +1,36 @@
 import {Controller,Get, Post, Body, Param, Put, Delete} from '@nestjs/common'
 import {users,User} from './entity/user.entity'
+import { UsersService } from './users.service'
 @Controller('users')
 export class UsersController{
 
+    constructor(private usersService:UsersService){
+
+
+    }
+
     @Get()
     getUsers(){
-        return users
+        return this.usersService.getUsers()
     }
     @Get('/:id')
     getUser(@Param('id') id:number){
-        return users[id]
+        return this.usersService.getUser(id)
     }
 
     @Post()
     createUser(@Body() data:any){
-        const newUser = new User(data.email,data.password)
-        users.push(newUser)
-        return newUser
+        
+        return this.usersService.createUser(data)
     }
 
     @Put('/:id')
     updateUser(@Param('id') id:number ,@Body() data:any){
-        const user = users[id]
-        user.email = data.email
-        user.password = data.password
-        users[id] = user
-        return user
+        return this.usersService.updateUser(id,data)
     }
 
     @Delete('/:id')
     deleteUser(@Param('id') id:number){
-        return users.splice(id,1)
+        return this.usersService.deleteUser(id)
     }
 }
