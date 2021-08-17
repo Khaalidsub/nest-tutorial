@@ -22,7 +22,7 @@ export class UsersController{
 
     @Post()
     createUser(@Body() data:CreateUserInput){
-        
+
         return this.usersService.createUser(data)
     }
 
