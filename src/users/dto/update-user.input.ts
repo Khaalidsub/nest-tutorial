@@ -4,7 +4,7 @@ export class UpdateUserInput{
     @IsEmail()
     email?:string
     @IsOptional()
-    @MinLength(3)
+    @MinLength(4)
     password?:string
 
 }
@@ -14,7 +14,7 @@ export class UpdateUserAdminInput{
     @IsEmail()
     email?:string
     @IsOptional()
-    @MinLength(3)
+    @MinLength(4)
     password?:string
     @IsOptional()
     isApproved?:boolean
