@@ -13,11 +13,15 @@ export class PostsService {
   }
 
   findAll() {
-    return posts;
+    return posts.map(post=>{
+      return {...post, author:this.usersService.getUser(post.authorId)}
+    })
   }
 
   findOne(id: number) {
-    return posts[id]
+    const post =  posts[id]
+    post.author = this.usersService.getUser(post.authorId)
+    return post
   }
 
   update(id: number, updatePostDto: UpdatePostDto) {
