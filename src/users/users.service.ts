@@ -1,11 +1,18 @@
-import {Injectable} from '@nestjs/common'
+import {Injectable, Inject, forwardRef} from '@nestjs/common'
  import { User, users } from './entity/user.entity';
 import {CreateUserInput} from './dto/create-user.input'
 import {UpdateUserAdminInput, UpdateUserInput} from './dto/update-user.input'
+import { PostsService } from '../posts/posts.service';
  @Injectable()
 export class UsersService {
+    constructor(  @Inject(forwardRef(()=>PostsService)) private postsService:PostsService){}
   getUsers() {
-    return users;
+    return users.map((user,index) => {
+      return {
+        ...user,
+        posts: this.postsService.findAllByAuthorId(index) || []
+      }
+    });
   }
   getUser(id: number) {
     return users[id];
