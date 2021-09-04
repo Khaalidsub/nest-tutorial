@@ -23,7 +23,10 @@ export class PostsService {
   }
 
   findOne(id: number) {
-    const post =  posts[id]
+    const post = posts.find((post,index)=>index===id)
+
+    if(!post) throw new Error('Post not found')
+
     post.author = this.usersService.getUser(post.authorId)
     return post
   }

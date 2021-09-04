@@ -1,10 +1,10 @@
-import {Controller,Get, Post, Body, Param, Put, Delete} from '@nestjs/common'
-import {users,User} from './entity/user.entity'
+import {Controller,Get, Post, Body, Param, Put, Delete, Logger} from '@nestjs/common'
 import {CreateUserInput} from './dto/create-user.input'
 import { UsersService } from './users.service'
 import { UpdateUserInput } from './dto/update-user.input'
 @Controller('users')
 export class UsersController{
+    private logger = new Logger(UsersController.name)
 
     constructor(private usersService:UsersService){
 
@@ -13,7 +13,13 @@ export class UsersController{
 
     @Get()
     getUsers(){
-        return this.usersService.getUsers()
+        try {
+            const results =  this.usersService.getUsers()
+            return results
+        } catch (error) {
+            // console.log(error)
+            /**error */            
+        }
     }
     @Get('/:id')
     getUser(@Param('id') id:number){
