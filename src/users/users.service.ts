@@ -22,6 +22,10 @@ export class UsersService {
     return users[id];
   }
 
+  getUserByEmail(email:string){
+    return users.find(user=>user.email === email)
+  }
+
   createUser(data: CreateUserInput) {
     const newUser = new User(data.email, data.password);
     this.logger.log(`A new user has been created. user : ${newUser.email}`)
