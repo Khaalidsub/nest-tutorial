@@ -24,9 +24,7 @@ export class UsersService {
 
   createUser(data: CreateUserInput) {
     const newUser = new User(data.email, data.password);
-    this.logger.log(`A new user has been created. user : ${newUser.email}`)
     users.push(newUser);
-
     return newUser;
   }
 

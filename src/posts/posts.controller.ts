@@ -5,7 +5,6 @@ import { UpdatePostDto } from './dto/update-post.dto';
 
 @Controller('posts')
 export class PostsController {
-  private logger = new Logger(PostsController.name)
   constructor(private readonly postsService: PostsService) {}
 
   @Post()
@@ -20,13 +19,7 @@ export class PostsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    try {
     return this.postsService.findOne(+id);
-      
-    } catch (error) {
-      this.logger.error(error.message)
-      return error.message
-    }
   }
 
   @Patch(':id')

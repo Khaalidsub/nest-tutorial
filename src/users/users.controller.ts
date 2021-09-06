@@ -4,7 +4,6 @@ import { UsersService } from './users.service'
 import { UpdateUserInput } from './dto/update-user.input'
 @Controller('users')
 export class UsersController{
-    private logger = new Logger(UsersController.name)
 
     constructor(private usersService:UsersService){
 
